@@ -1,0 +1,34 @@
+{
+  "name": "tessel2-easel",
+  "version": "0.2.7",
+  "iris": {
+    "abilities": {
+      "detectPorts": true,
+      "zProbe": true
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruswerner/tessel2-easel"
+  },
+  "keywords": [
+    "xcarve",
+    "inventables",
+    "tessel",
+    "shapeoko",
+    "easel"
+  ],
+  "author": "Rus Werner <rus.werner@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ruswerner/tessel2-easel/issues"
+  },
+  "homepage": "https://github.com/ruswerner/tessel2-easel",
+  "dependencies": {
+    "serialport": "^4.0.1",
+    "socket.io": "^1.3.7"
+  },
+  "engines": {
+    "node": ">=4.2.0"
+  }
+}
