@@ -12,11 +12,15 @@ device at `/dev/ttyACM0`. This is hard-coded in `lib/serial_port_controller.js` 
 The Tessel needs to have the hostname set to `xcarve.local`, so rename it using the CLI tools:
 
     $ t2 rename xcarve
-    
+
+## Download this repo
+Download or clone this repo into a directory. Then `cd` into this directory for the next step...
+
 ## Push the Easel Driver to Tessel
 This only needs to be done once and then everytime you power on the Tessel, it will start up the server and listen
 for connections from Easel.
 
+    $ npm install
     $ t2 push iris.js
     
 Alternatively, if you want to see the console output while it is running, you can do this:
