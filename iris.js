@@ -5,19 +5,6 @@ var io       = require('socket.io')
   , path = require('path')
   , Debugger = require('./lib/debugger');
 
-var SerialPort = require('serialport');
-SerialPort.list(function (err, ports) {
-  if(err) {
-    console.log(err);
-    return;
-  }
-  ports.forEach(function(port) {
-    console.log(port.comName);
-    console.log(port.pnpId);
-    console.log(port.manufacturer);
-  });
-});
-
 var WEBSOCKET_PORT = process.argv[2] || 1338;
 
 var logger = Debugger.logger('iris.js');
