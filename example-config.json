@@ -1,0 +1,8 @@
+{
+  "serialPorts": [
+    {
+      "comName": "/dev/ttyACM0",
+      "manufacturer": "Arduino"
+    }
+  ]
+}

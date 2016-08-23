@@ -14,13 +14,21 @@ The Tessel needs to have the hostname set to `xcarve.local`, so rename it using 
     $ t2 rename xcarve
 
 ## Download this repo
-Download or clone this repo into a directory. Then `cd` into this directory for the next step...
+Download or clone this repo into a directory. Then `cd` into this directory and run:
+
+    $ npm install
+
+## Configure the serial port
+There is a bug with the `serialport` package when it tries to enumerate the available serial devices on
+the Tessel 2; so for now you need to manually list them in the config file: `config.json`. This file should have
+been created for you in the previous step; if not, just copy the `example-config.json` file and edit as needed.
+The device in the example file is from an Arduino UNO connected via USB to the Tessel 2. You might have to 
+access the Tessel using `t2 root` and run `ls /dev/tty*` to find the correct device.
 
 ## Push the Easel Driver to Tessel
 This only needs to be done once and then everytime you power on the Tessel, it will start up the server and listen
 for connections from Easel.
 
-    $ npm install
     $ t2 push iris.js
     
 Alternatively, if you want to see the console output while it is running, you can do this:

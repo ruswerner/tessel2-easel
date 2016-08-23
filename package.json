@@ -7,6 +7,9 @@
       "zProbe": true
     }
   },
+  "scripts": {
+    "postinstall": "cp example-config.json config.json"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
