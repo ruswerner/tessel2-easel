@@ -14,13 +14,12 @@ Copy files into place:
 
 Check `package.json` for updated/new dependencies and additional config.
 
-Patch `serial_port_controller.js` to return the USB device on the Tessel 2:
+Patch `serial_port_controller.js` to return the USB devices from `config.json`:
 
+    , config = require('../config.json');
+
+    ...
+    
     var listPorts = function (callback) {
-      callback([
-        {
-          comName:'/dev/ttyACM0',
-          manufacturer: 'Arduino'
-        }
-        ]);
+      callback(config.serialPorts);
     };
