@@ -5,7 +5,8 @@ var io       = require('socket.io')
   , path = require('path')
   , Debugger = require('./lib/debugger');
 
-var WEBSOCKET_PORT = process.argv[2] || 1338;
+var WEBSOCKET_PORT = parseInt(process.argv[2] || 1338);
+var WEBSOCKET_SECURE_PORT = WEBSOCKET_PORT + 100;
 
 var logger = Debugger.logger('iris.js');
 
@@ -13,17 +14,22 @@ var json = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf
 var version = json.version;
 var iris = json.iris;
 
+// TODO: Remove port 80 after SSL is enforced in production
+var origins = process.argv[3] || "easel.inventables.com:80 easel.inventables.com:443 easelstaging.inventables.com:80 easelstaging.inventables.com:443 easel.invinternal.com:443 easel-secure.inventables.com:443 easel-insecure.inventables.com:80";
+
+function startApp(http, port, options) {
+  var app = http.createServer(options);
+  var appIo = io.listen(app);
+
+  appIo.origins(origins);
+
+  logger.log("Listening on port " + port + " for connections from " + origins);
+
+  app.listen(port, "0.0.0.0");
+
+  return new WebsocketController(appIo.sockets, version, iris.abilities);
+}
+
 logger.log("Starting Easel Local " + version);
 
-var app = http.createServer()
-io = io.listen(app);
-
-// TODO: Remove port 80 after SSL is enforced in production
-var origins = process.argv[3] || "easel.inventables.com:80 easel.inventables.com:443 easelstaging.inventables.com:80 easelstaging.inventables.com:443"
-io.origins(origins);
-
-logger.log("Listening on port " + WEBSOCKET_PORT + " for connections from " + origins);
-
-app.listen(WEBSOCKET_PORT, "0.0.0.0");
-
-var websocketController = new WebsocketController(io.sockets, version, iris.abilities);
+var app = startApp(http, WEBSOCKET_PORT);
